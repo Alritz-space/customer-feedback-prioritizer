@@ -77,7 +77,7 @@ judgment call that separates a useful signal from noise.
 | File | What it is |
 |---|---|
 | [`feedback_sample_data.csv`](./feedback_sample_data.csv) | 24 synthetic feedback items (reviews, tickets, surveys) used as pipeline input |
-| `feedback-prioritizer-blueprint.json` | Exported Make.com scenario — import directly to inspect or run it yourself (add your own `GEMINI_API_KEY` where the placeholder appears) |
+| [`feedback-prioritizer-blueprint.json`](./feedback-prioritizer-blueprint.json) | Exported Make.com scenario — import directly to inspect or run it yourself (add your own `GEMINI_API_KEY` where the placeholder appears) |
 | `canvas-screenshot.png` | Full pipeline view on the Make canvas |
 
 ## A Few Build Notes
