@@ -1,0 +1,817 @@
+{
+    "name": "Integration Tools, JSON",
+    "flow": [
+        {
+            "id": 2,
+            "module": "util:SetVariables",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "scope": "roundtrip",
+                "variables": [
+                    {
+                        "name": "feedback_item",
+                        "value": "{\n  \"items\": [\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"I love the product but I genuinely can't figure out the pricing tiers. Spent 20 minutes on the pricing page still confused which plan I need.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Why is there no CSV export? I need this data in Excel for my manager every week and I'm stuck copy-pasting rows manually.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"The dashboard takes forever to load, especially in the mornings. Sometimes I just give up and check back later.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"First week was rough — nobody explained what to do after signup. Just dropped into an empty dashboard with no guidance.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Your support team resolved my billing issue in literally 10 minutes over chat. Genuinely impressed, wanted to say thanks.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"Confusing pricing page. I upgraded thinking I'd get feature X and didn't — had to email support to understand the difference between plans.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"Mobile app crashes every time I try to attach a photo to a report. Happens on both wifi and mobile data.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Please add export to Excel or Google Sheets. Being locked into your UI for reporting is a dealbreaker for my team.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"Loading is painfully slow when I have more than a few hundred rows. Feels like it's not built for real data volume.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"Onboarding just throws you in with zero tooltips. A short walkthrough would've saved me an hour of clicking around confused.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Whoever handled my refund request was fantastic — fast, clear, no hassle at all.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"I still don't understand what's different between the Pro and Business plans. The comparison table doesn't help much.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"Export feature would change everything for me. Right now I screenshot tables which is embarrassing honestly.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"App froze and crashed twice today on Android while uploading images.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"Dashboard load time got noticeably worse over the last month. Used to be fast, now it's a coffee-break wait.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"New user here — wish there was a guided setup instead of a blank screen. Almost gave up on day one.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Billing was unclear so I contacted support, and honestly the rep was excellent and patient with me.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"Would pay more for a real export function. CSV, Excel, anything — just get my data out of here easily.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"Crashes when attaching files on mobile, very frustrating during client visits.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Pricing page doesn't clarify what happens if I go over my usage limit. Found out the hard way with a surprise charge.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"Big pages load slowly, especially on my laptop which isn't old. Might be a backend issue on your end.\"\n    },\n    {\n      \"source\": \"App Store review\",\n      \"text\": \"No onboarding checklist or tour at all. Felt lost for the first few days using this.\"\n    },\n    {\n      \"source\": \"Support ticket\",\n      \"text\": \"Just wanted to flag — your live chat support has been consistently great every time I've used it.\"\n    },\n    {\n      \"source\": \"Survey response\",\n      \"text\": \"I need to export reports weekly and currently rely on a third-party workaround because you don't support it natively.\"\n    }\n  ]\n}"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        },
+                        "variables": {
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "variables",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Variable name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "label": "Variable value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Variable"
+                        },
+                        "type": "array",
+                        "label": "Variables",
+                        "validate": {
+                            "unique": {
+                                "by": "name"
+                            }
+                        }
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "feedback_item",
+                        "type": "any",
+                        "label": "feedback_item"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": 555434
+            },
+            "mapper": {
+                "json": "{{2.feedback_item}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "My data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "help": "",
+                        "name": "items",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "source",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "text",
+                                    "type": "text"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Items"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "json:CreateJSON",
+            "version": 1,
+            "parameters": {
+                "type": 555977,
+                "space": ""
+            },
+            "filter": null,
+            "mapper": {
+                "items": [
+                    {
+                        "text": "",
+                        "source": "{{3.items}}"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 597,
+                    "y": -14
+                },
+                "restore": {
+                    "expect": {
+                        "items": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "type": {
+                            "label": "feedback_items_structure"
+                        },
+                        "space": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure",
+                        "required": true
+                    },
+                    {
+                        "name": "space",
+                        "type": "select",
+                        "label": "Indentation",
+                        "validate": {
+                            "enum": [
+                                "tab",
+                                "2",
+                                "4"
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "items",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "source",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "text",
+                                    "type": "text"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Items"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "http:MakeRequest",
+            "version": 4,
+            "parameters": {
+                "tlsType": "",
+                "authenticationType": "noAuth"
+            },
+            "mapper": {
+                "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=YOUR_GEMINI_API_KEY",
+                "method": "post",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "timeout": "300",
+                "contentType": "json",
+                "inputMethod": "dataStructure",
+                "shareCookies": false,
+                "parseResponse": true,
+                "allowRedirects": true,
+                "stopOnHttpError": true,
+                "bodyDataStructure": 555388,
+                "dataStructureBodyContent": {
+                    "contents": [
+                        {
+                            "parts": [
+                                {
+                                    "text": "You are a product manager analyzing raw customer feedback for a B2B SaaS product. Given the feedback items below, do three things: (1) for each item, identify its theme, sentiment (positive/negative/neutral), and a one-sentence summary; (2) group items into themes and count frequency per theme; (3) for each theme, assign an impact score from 1 to 3 (1 = minor annoyance, 3 = blocks core usage or drives churn) with a one-sentence rationale grounded in what customers said. Return ONLY valid JSON in this exact shape, no markdown formatting, no commentary: {\"themes\":[{\"theme\":\"...\",\"frequency\":0,\"impact\":0,\"rationale\":\"...\",\"sample_quotes\":[\"...\",\"...\"]}]}. Feedback items:{{10.json}}"
+                                }
+                            ]
+                        }
+                    ],
+                    "generationConfig": {
+                        "responseMimeType": "application/json"
+                    }
+                },
+                "requestCompressedContent": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 897,
+                    "y": -14
+                },
+                "restore": {
+                    "expect": {
+                        "method": {
+                            "mode": "chose",
+                            "label": "POST",
+                            "collapsed": true
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ],
+                            "collapsed": true
+                        },
+                        "contentType": {
+                            "label": "application/jsonEnter data in the JSON format, as a string or using a data structure."
+                        },
+                        "inputMethod": {
+                            "label": "Data structureDefine the JSON body with a data structure to map or enter values for each key. JSON reserved characters are escaped automatically."
+                        },
+                        "shareCookies": {
+                            "mode": "chose"
+                        },
+                        "parseResponse": {
+                            "mode": "chose"
+                        },
+                        "allowRedirects": {
+                            "mode": "chose"
+                        },
+                        "paginationType": {
+                            "label": "Empty"
+                        },
+                        "queryParameters": {
+                            "mode": "chose",
+                            "collapsed": true
+                        },
+                        "stopOnHttpError": {
+                            "mode": "chose"
+                        },
+                        "bodyDataStructure": {
+                            "label": "gemini_request_body"
+                        },
+                        "dataStructureBodyContent": {
+                            "nested": {
+                                "contents": {
+                                    "mode": "chose",
+                                    "items": [
+                                        {
+                                            "parts": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    null
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "requestCompressedContent": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "tlsType": {
+                            "label": "Empty",
+                            "collapsed": true
+                        },
+                        "authenticationType": {
+                            "label": "No authenticationUse when no credentials are required for the request.",
+                            "collapsed": true
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "authenticationType",
+                        "type": "select",
+                        "label": "Authentication type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "noAuth",
+                                "apiKey",
+                                "basicAuth",
+                                "oAuth"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tlsType",
+                        "type": "select",
+                        "label": "Transport layer security (TLS)",
+                        "validate": {
+                            "enum": [
+                                "mTls",
+                                "tls"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "proxyKeychain",
+                        "type": "keychain:proxy",
+                        "label": "Proxy"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Name",
+                                    "required": true,
+                                    "validate": {
+                                        "pattern": "^[-!#$%&'*+.^_`|~0-9A-Za-z]+$"
+                                    }
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Header"
+                        },
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "queryParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Parameter"
+                        },
+                        "type": "array",
+                        "label": "Query parameters"
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Body content type",
+                        "validate": {
+                            "enum": [
+                                "json",
+                                "multipart",
+                                "urlEncoded",
+                                "custom"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "stopOnHttpError",
+                        "type": "boolean",
+                        "label": "Return error if HTTP request fails",
+                        "required": true
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "allowRedirects",
+                        "type": "boolean",
+                        "label": "Allow redirects",
+                        "required": true
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "requestCompressedContent",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "inputMethod",
+                        "type": "select",
+                        "label": "Body input method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "dataStructure",
+                                "jsonString"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "bodyDataStructure",
+                        "type": "udt",
+                        "label": "Body structure",
+                        "required": true
+                    },
+                    {
+                        "name": "dataStructureBodyContent",
+                        "spec": [
+                            {
+                                "name": "contents",
+                                "spec": {
+                                    "name": "value",
+                                    "spec": [
+                                        {
+                                            "name": "parts",
+                                            "spec": {
+                                                "spec": [
+                                                    {
+                                                        "name": "text",
+                                                        "type": "text"
+                                                    }
+                                                ],
+                                                "type": "collection"
+                                            },
+                                            "type": "array"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array",
+                                "label": "Contents"
+                            },
+                            {
+                                "name": "generationConfig",
+                                "spec": [
+                                    {
+                                        "name": "responseMimeType",
+                                        "type": "text",
+                                        "label": "Response mime type"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Generation config"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Body content"
+                    },
+                    {
+                        "name": "paginationType",
+                        "type": "select",
+                        "label": "Pagination type",
+                        "validate": {
+                            "enum": [
+                                "offsetBased",
+                                "pageBased",
+                                "urlBased",
+                                "tokenBased"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "label": "Data"
+                    },
+                    {
+                        "name": "statusCode",
+                        "type": "number",
+                        "label": "Status Code"
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "content-length",
+                                "type": "text",
+                                "label": "Content-Length"
+                            },
+                            {
+                                "name": "content-encoding",
+                                "type": "text",
+                                "label": "Content-Encoding"
+                            },
+                            {
+                                "name": "content-type",
+                                "type": "text",
+                                "label": "Content-Type"
+                            },
+                            {
+                                "name": "server",
+                                "type": "text",
+                                "label": "Server"
+                            },
+                            {
+                                "name": "cache-control",
+                                "type": "text",
+                                "label": "Cache-Control"
+                            },
+                            {
+                                "name": "set-cookie",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "Set-Cookie"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Headers"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 7,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": 555409
+            },
+            "mapper": {
+                "json": "{{5.data.candidates[].content.parts[].text}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1195,
+                    "y": 13
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "gemini_extraction_response"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "help": "",
+                        "name": "results",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "source",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "theme",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "sentiment",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "summary",
+                                    "type": "text"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "filter": null,
+            "mapper": {
+                "array": "{{7.themes}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1495,
+                    "y": 13
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "module": "util:TextAggregator",
+            "version": 1,
+            "parameters": {
+                "feeder": 12,
+                "rowSeparator": "\n"
+            },
+            "mapper": {
+                "value": "| {{12.theme}} | {{12.frequency}} | {{12.impact}} | {{12.rationale}} |"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1795,
+                    "y": 13,
+                    "messages": [
+                        {
+                            "category": "last",
+                            "severity": "warning",
+                            "message": "You're not using the data generated by this module. Consider removing it, or add module(s) after it."
+                        }
+                    ]
+                },
+                "restore": {
+                    "extra": {
+                        "feeder": {
+                            "label": "Iterator [12]"
+                        }
+                    },
+                    "parameters": {
+                        "rowSeparator": {
+                            "label": "New row"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "rowSeparator",
+                        "type": "select",
+                        "label": "Row separator",
+                        "validate": {
+                            "enum": [
+                                "\n",
+                                "\t",
+                                "other"
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "advanced": true
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}
